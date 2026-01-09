@@ -76,5 +76,5 @@ Deployment: Render
 ☁️ Deploy on AWS/GCP/Azure for scalability
 
 👨‍💻 Author
-Developed by Viraj Barapatre ✨
-📌 GitHub: https://github.com/VirajBarapatre
+Developed by Arya Bhor ✨
+📌 GitHub: https://github.com/arya10012
