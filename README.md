@@ -1,80 +1,161 @@
-# AI Dynamic Pricing Simulator
+# PriceOpt AI - Dynamic Pricing Optimization Engine
 
-An **AI-powered simulator** that predicts **demand, revenue, and profit** for products across multiple categories and recommends the **optimal price** using Machine Learning.  
+![PriceOpt AI Badge](https://img.shields.io/badge/Status-Active-success) ![Stack](https://img.shields.io/badge/Stack-React%20%7C%20Node.js%20%7C%20TypeScript-blue)
 
-🌐 **Live Demo**: [View on Render](https://dynamic-pricing-simulator.onrender.com/)  Render may take ~30s cold start
+**PriceOpt AI** is a robust, full-stack simulation platform designed to help businesses determine the optimal pricing strategy for their products. By leveraging Machine Learning algorithms (Multivariate Linear Regression) and real-time market data simulation, it predicts demand, revenue, and profit under various scenarios, empowering users to make data-driven decisions.
 
----
-
-## 🚀 Features
-- 📊 Predicts **demand, revenue, profit** for user-input price
-- 💡 Recommends **optimal product price** using ML models
-- 🎨 Interactive **web interface** with Flask + Tailwind CSS
-- 📈 Visualizes **Demand & Profit curves** with Chart.js
-- 🛒 Dataset generator simulates **real-world market data** (20+ products per category)
-- ⚡ Trained with **Random Forest** for accuracy & fast predictions  
+Recently re-engineered from a Python prototype to a high-performance **React + Node.js** architecture, this application demonstrates the power of modern web technologies in solving complex business problems.
 
 ---
 
-## 📂 Project Structure
+## ✨ Key Features
+
+- **🧠 AI-Powered Optimization**: Automatically calculates the price point that maximizes profit using advanced regression models.
+- **📊 Real-Time Simulation**: Instantly predicts Demand, Revenue, and Profit as you adjust input parameters (Cost, Competitor Prices, Seasonality).
+- **📈 Interactive Visualizations**: Dynamic Demand Curves and Profit Charts built with **Recharts** allow for deep analytical insights.
+- **🛒 Synthetic Market Data**: The backend automatically generates a realistic dataset of 20+ products across multiple categories (Smartphones, Laptops, Wearables, Home) with built-in seasonality and price elasticity.
+- **⚡ Modern Tech Stack**: Built with **Vite**, **React 18**, **Tailwind CSS**, and **Express/Node.js** for a lightning-fast user experience.
+
+---
+
+## 🚀 Benefits
+
+### For Business Owners
+- **Maximize Margins**: Identify the "sweet spot" price that yields the highest profit, not just the highest revenue.
+- **Competitive Edge**: react dynamically to competitor price changes and market trends.
+- **Risk-Free Experimentation**: Test pricing strategies in a simulated environment before applying them to the real market.
+
+### For Developers
+- **Scalable Architecture**: The separation of concerns between the React frontend and Node.js backend allows for independent scaling and development.
+- **Type Safety**: Full TypeScript implementation ensures robust code quality and fewer runtime errors.
+- **Extensible ML Pipeline**: The modular design allows for easy swapping of ML models (e.g., upgrading from Linear Regression to Random Forest or Neural Networks).
+
+---
+
+## 💡 Use Cases
+
+1. **E-Commerce Pricing Strategy**: Online retailers can use the engine to adjust prices dynamically based on competitor data and inventory levels.
+2. **Product Launch Planning**: Simulate different launch price points to estimate initial demand and revenue.
+3. **Seasonal Promotions**: Analyze how holidays and weekends affect demand elasticity to plan effective discount campaigns.
+4. **Inventory Management**: Predict sales volume at different price points to optimize stock levels and reduce holding costs.
+
+---
+
+## 🛠️ Technical Architecture
+
+The application follows a modern client-server architecture:
+
+### **Frontend (Client)**
+- **Framework**: React 18 (via Vite)
+- **Styling**: Tailwind CSS (v3) + clsx + tailwind-merge
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **State Management**: React Hooks (useState, useEffect)
+
+### **Backend (Server)**
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Language**: TypeScript
+- **Validation**: Zod
+- **Machine Learning**: `ml-regression-multivariate-linear` (Custom implementation for JS environment)
+- **Data Generation**: Custom algorithm simulating seasonality, elasticity, and competitor influence.
+
+---
+
+## 📦 Installation & Setup
+
+Follow these steps to get the application running locally.
+
+### Prerequisites
+- **Node.js**: v18.0.0 or higher
+- **npm**: v9.0.0 or higher
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/yourusername/dynamic-pricing-engine.git
+cd dynamic-pricing-engine
 ```
-ai-dynamic-pricing-simulator/
-├── app.py                  # Main Flask app
-├── extended_retail_data.py # Generates synthetic dataset
-├── requirements.txt        # Python dependencies
-├── README.md               # Project documentation
-├── .gitignore              # Ignore cache & venv files
-│
-├── data/
-│   └── extended_retail_data.csv   # Generated dataset (optional, can regenerate)
-│
-├── templates/
-│   └── index.html          # Frontend page
+
+### Step 2: Install Dependencies
+We have a convenience script to install dependencies for both the root, client, and server.
+
+```bash
+npm run install:all
+```
+
+*Alternatively, you can install them manually:*
+```bash
+cd client && npm install
+cd ../server && npm install
+```
+
+### Step 3: Run the Application
+Start both the backend server and frontend client concurrently with a single command:
+
+```bash
+npm run dev
+```
+
+- **Frontend Dashboard**: Open [http://localhost:5173](http://localhost:5173)
+- **Backend API**: Running on [http://localhost:3000](http://localhost:3000)
+
+> **Note**: On the first run, the backend will take a few seconds to generate the synthetic dataset and train the initial ML model. Look for "Model Ready" in the UI.
+
+---
+
+## 🔌 API Reference
+
+The backend exposes the following REST endpoints:
+
+### `GET /api/config`
+Returns the available product catalog and categories.
+
+**Response:**
+```json
+{
+  "Smartphones": { "products": ["iPhone 15", ...], "price_min": 300, ... },
+  ...
+}
+```
+
+### `GET /api/health`
+Checks the server status and model training state.
+
+**Response:**
+```json
+{ "status": "ok", "trained": true }
+```
+
+### `POST /api/predict`
+Calculates predictions and optimal pricing for a given scenario.
+
+**Payload:**
+```json
+{
+  "product_name": "iPhone 15 Pro",
+  "unit_cost": 800,
+  "unit_price": 999,
+  "comp_1": 950,
+  "comp_2": 980,
+  "comp_3": 1000,
+  ...
+}
 ```
 
 ---
-## ⚡ How to Run Locally
-1. **Clone Repo**
-```bash
-git clone https://github.com/yourusername/ai-dynamic-pricing-simulator.git
-cd ai-dynamic-pricing-simulator
-```
 
+## 🔮 Future Roadmap
 
-**Install Dependencies**
-```bash
-pip install -r requirements.txt
-```
+- [ ] **User Authentication**: Save multiple scenarios and pricing history.
+- [ ] **Real Data Import**: Upload CSV files to train the model on your own sales data.
+- [ ] **Advanced Models**: Implement Random Forest or Gradient Boosting for higher prediction accuracy.
+- [ ] **Export Reports**: Generate PDF/Excel reports of the pricing analysis.
 
-**Generate Dataset**
-```bash
-python dataset_generator.py
-```
+---
 
-**Run App**
-```bash
-python app.py
-```
-App will run at 👉 http://127.0.0.1:5000
+## 👨‍💻 Author
 
-📸 Screenshots
+**Oladi**  
+*Full Stack Developer & AI Enthusiast*
 
-**Web Interface**
-
-<img width="500" height="1000" alt="dynamic-pricing-simulator onrender com_" src="https://github.com/user-attachments/assets/5ce9ea30-17cb-4e7a-abe5-9e91508a24d5" />
-
-🛠️ Tech Stack
-Backend: Flask (Python)
-ML: scikit-learn, pandas, numpy
-Frontend: Tailwind CSS, Chart.js
-Deployment: Render
-
-📈 Future Improvements
-🔑 User authentication for business accounts
-📊 Upload & train on real-world pricing datasets
-🤖 Explore Reinforcement Learning for dynamic pricing updates
-☁️ Deploy on AWS/GCP/Azure for scalability
-
-👨‍💻 Author
-- Developed by Arya Bhor ✨
-📌 GitHub: https://github.com/arya10012
+Based on the original concept by Arya Bhor.
